@@ -7,6 +7,8 @@ import Dashboard from "../pages/user";
 import WaitlistsPage from "../pages/user/waitlists";
 import WaitlistPage from "../pages/user/waitlist";
 import NotFoundPage from "../pages/404";
+import CreateWaitlistPage from "../pages/user/createWaitlist";
+import SettingsPage from "../pages/user/settings";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: "/app/waitlist/:waitlistID",
     element: <WaitlistPage />,
+  },
+  {
+    path: "/app/waitlist",
+    element: <CreateWaitlistPage />,
+  },
+  {
+    path: "/app/settings",
+    element: <SettingsPage />,
   },
   {
     path: "*",

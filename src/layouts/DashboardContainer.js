@@ -1,9 +1,11 @@
 import { useState } from "react";
 import DashboardNav from "../components/layouts/DashboardNav";
 import Sidebar from "../components/layouts/SideBar";
+import { getTokenFromLocal } from "../services/api";
 
 const DashboardContainer = ({ children }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  getTokenFromLocal();
   return (
     <>
       <DashboardNav setOpenMenu={()=> setOpenMenu(!openMenu)} />

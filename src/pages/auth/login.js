@@ -63,7 +63,7 @@ import { LogUserIn, Login, validateEmail } from "../../services/api";
         status: 'success',
         isClosable: true,
       })
-      await LogUserIn(api);
+      await LogUserIn({ ...api, email: payload.email});
       window.location.href="/app/dashboard"
     };
     return (

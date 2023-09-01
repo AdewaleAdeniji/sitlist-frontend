@@ -1,6 +1,21 @@
+import parse from "html-react-parser";
+import { prettyPrintJson } from "pretty-print-json";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const WaitlistFormItem = ({ title, count, dateCreated, waitlistID }) => {
+const WaitlistFormItem = ({
+  title,
+  count,
+  dateCreated,
+  waitlistID,
+  isData,
+  dataJSON,
+}) => {
+  const [show, setShow] = useState(false);
+  var html = "";
+  if (isData) {
+    html = prettyPrintJson.toHtml(dataJSON || {});
+  }
   return (
     <li className="py-4">
       <div className="flex items-center space-x-4">
@@ -24,20 +39,36 @@ const WaitlistFormItem = ({ title, count, dateCreated, waitlistID }) => {
           <p className="text-base font-semibold text-gray-900 truncate dark:text-white">
             {title}
           </p>
-          <p className="text-sm font-normal text-gray-500 truncate dark:text-gray-400">
-            {count || 0} Filled
+          {!isData && (
+            <p className="text-xs font-normal text-gray-500  dark:text-gray-400">
+              {count} Filled
+            </p>
+          )}
+          <p className="text-xs font-normal text-gray-500  dark:text-gray-400">
+            {isData ? "Saved" : "Created"} - {dateCreated}
           </p>
-          <p className="text-sm font-normal text-gray-500 truncate dark:text-gray-400">
-            {dateCreated}
-          </p>
+          {show && isData && (
+            <p className="text-sm font-normal text-gray-500  dark:text-gray-400">
+              {parse(html)}
+            </p>
+          )}
         </div>
         <div className="inline-flex items-center">
-          <Link
-            to={`/app/waitlist/${waitlistID}`}
-            className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-          >
-            View
-          </Link>
+          {isData ? (
+            <button
+              className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 text-sm"
+              onClick={() => setShow(!show)}
+            >
+              {show ? "Hide" : "Show"} JSON Payload
+            </button>
+          ) : (
+            <Link
+              to={`/app/waitlist/${waitlistID}`}
+              className="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            >
+              View Details
+            </Link>
+          )}
         </div>
       </div>
     </li>

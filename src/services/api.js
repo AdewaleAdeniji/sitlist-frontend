@@ -84,7 +84,7 @@ export const Login = async (payload) => {
     };
   }
 };
-const getTokenFromLocal = () => {
+export const getTokenFromLocal = () => {
   const token = localStorage.getItem("token");
   if (!token) {
     window.location.href = "/auth/login";
@@ -92,17 +92,85 @@ const getTokenFromLocal = () => {
   }
   return token;
 };
-export const CreateEmail = async (payload) => {
+
+export const getWaitlistForms = async () => {
   const token = await getTokenFromLocal();
-  // {
-  //   "userID": "",
-  //   "permanent": true,
-  //   "emailName": "myownemail"
-  // }
+  var config = {
+    method: "get",
+    url: `${configs.API_BASE_URL}/waitlists`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const req = await axios(config);
+    return {
+      success: true,
+      ...req.data,
+    };
+  }  catch (err) {
+    //handleStatusCode(err?.response?.status);
+    return {
+      success: false,
+      message: err?.response?.data?.message || "Request failed ",
+    };
+  }
+};
+export const getAPIKeys = async () => {
+  const token = await getTokenFromLocal();
+  var config = {
+    method: "get",
+    url: `${configs.API_BASE_URL}/keys`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const req = await axios(config);
+    return {
+      success: true,
+      ...req.data,
+    };
+  }  catch (err) {
+    //handleStatusCode(err?.response?.status);
+    return {
+      success: false,
+      message: err?.response?.data?.message || "Request failed ",
+    };
+  }
+};
+export const getWaitlist = async (waitlistID) => {
+  const token = await getTokenFromLocal();
+  var config = {
+    method: "get",
+    url: `${configs.API_BASE_URL}/waitlists/data/${waitlistID}`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const req = await axios(config);
+    return {
+      success: true,
+      ...req.data,
+    };
+  }  catch (err) {
+    //handleStatusCode(err?.response?.status);
+    return {
+      success: false,
+      message: err?.response?.data?.message || "Request failed ",
+    };
+  }
+};
+export const createWaitlist = async (payload) => {
+  const token = await getTokenFromLocal();
   var data = JSON.stringify(payload);
   var config = {
     method: "post",
-    url: `${configs.API_BASE_URL}/email/create`,
+    url: `${configs.API_BASE_URL}/waitlist/create`,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -116,7 +184,7 @@ export const CreateEmail = async (payload) => {
       ...req.data,
     };
   }  catch (err) {
-    handleStatusCode(err?.response?.status);
+    //handleStatusCode(err?.response?.status);
     return {
       success: false,
       message: err?.response?.data?.message || "Request failed ",
