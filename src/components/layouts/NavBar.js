@@ -28,6 +28,18 @@ export default function NavBar() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
+            <Button
+                bg={"white.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "blue.500",
+                }}
+                onClick={() => (window.location.href = "/auth/signup")}
+              >
+                SitList Docs
+              </Button>
+          
               <Button
                 colorScheme={"blue"}
                 bg={"blue.400"}
@@ -36,6 +48,7 @@ export default function NavBar() {
                 _hover={{
                   bg: "blue.500",
                 }}
+                onClick={() => (window.location.href = "/auth/signup")}
               >
                 Get Started
               </Button>
