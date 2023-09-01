@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 
 import { useState } from "react";
+import { LogUserOut, getUser } from "../../services/api";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 const DashboardNav = ({ setOpenMenu }) => {
   const [openAppMenu, setOpenAppMenu] = useState(false);
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
-
+  const user = getUser();
   return (
     <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -356,51 +357,25 @@ const DashboardNav = ({ setOpenMenu }) => {
                     className="text-sm text-gray-900 dark:text-white"
                     role="none"
                   >
-                    Neil Sims
+                    {user?.firstName} {user?.lastName}
                   </p>
                   <p
                     className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                     role="none"
                   >
-                    neil.sims@flowbite.com
+                    {user?.email}
                   </p>
                 </div>
                 <ul className="py-1" role="none">
+                
                   <li>
-                    <a
-                      href="#"
+                    <button
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       role="menuitem"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                      role="menuitem"
+                      onClick={LogUserOut}
                     >
                       Sign out
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>

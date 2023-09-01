@@ -44,7 +44,7 @@ const WaitlistPage = () => {
   return (
     <DashboardContainer>
       <h1 className="font-bold">{loading ? <Spinner /> : waitlist?.waitlistTitle}</h1>
-      <h5 className="font-normal">{waitlistID}</h5>
+      <h5 className="font-normal">Waitlist/Form ID - {waitlistID}</h5>
       <div className="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
         <StatsCard
           title="Forms"
