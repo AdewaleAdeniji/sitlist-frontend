@@ -24,12 +24,6 @@ export const getUser = () => {
   }
 }
 export const Register = async (payload) => {
-  // {
-  //     firstName: "deji",
-  //     lastName: "sarumi",
-  //     email: "devferanmi@gmail.com",
-  //     password: "password",
-  //   }
   var data = JSON.stringify(payload);
   var config = {
     method: "post",

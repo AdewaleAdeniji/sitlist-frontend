@@ -51,13 +51,6 @@ import {
           isClosable: true,
         })
       }
-      if(payload.email.indexOf('startlify') > -1){
-        return toast({
-          title: `You cannot sign up with a startlify email`,
-          status: 'error',
-          isClosable: true,
-        })
-      }
       // all good
       setLoading(true);
       const api = await Register(payload);
@@ -96,7 +89,7 @@ import {
                 Sign up
               </Heading>
               <Text fontSize={"lg"} color={"gray.600"}>
-                Signup and Conquer Your Inbox Chaos with StartlifyEmail.
+              
               </Text>
             </Stack>
             <Box

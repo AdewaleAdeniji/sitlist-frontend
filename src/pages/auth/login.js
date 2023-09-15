@@ -80,8 +80,7 @@ import { LogUserIn, Login, validateEmail } from "../../services/api";
                 Login
               </Heading>
               <Text fontSize={"lg"} color={"gray.600"}>
-                Embrace the Future of Email Management: Secure Login to
-                StartlifyEmail.
+              
               </Text>
             </Stack>
             <Box
