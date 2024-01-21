@@ -72,7 +72,8 @@ import {
       if(!login){
         window.location.href="/auth/login"
       }
-      await LogUserIn({ ...api, email: payload.email});
+
+      await LogUserIn({ ...login, email: payload.email});
       window.location.href="/app/dashboard"
     };
     return (
